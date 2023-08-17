@@ -6,7 +6,7 @@ const router = require("../src/routers/men");
 const app = express();
 const port = process.env.PORT || 8000;
 
-app.use(express.json());
+app.use(express.json());   //when handling req.body in api to fecth json data properly
 app.use(router);
 
 // app.get("/", (req, res) => {

@@ -3,12 +3,12 @@ const router = new express.Router();
 
 const MensRanking = require("../models/mens");
 
-// we will handle post req
+// we will handle post req - create
 router.post("/mens", async (req, res) => {
     try {
         const addingMensRecords = new MensRanking(req.body)
         console.log(req.body);
-        const insertMens = await addingMensRecords.save();
+        const insertMens = await addingMensRecords.save(); // save in db
         res.status(201).send(insertMens);
 
     } catch(err) {
@@ -16,7 +16,7 @@ router.post("/mens", async (req, res) => {
     }
 })
 
-// we will handle get req
+// we will handle get req - read
 router.get("/mens", async (req, res) => {
     try {
         const getMens = await MensRanking.find({}).sort({"ranking" : 1});
@@ -27,7 +27,7 @@ router.get("/mens", async (req, res) => {
     }
 })
 
-// we will handle get req of individual
+// we will handle get req of an individual
 router.get("/mens/:id", async (req, res) => {
     try {
         const _id = req.params.id; 
@@ -44,7 +44,7 @@ router.patch("/mens/:id", async (req, res) => {
     try {
         const _id = req.params.id; 
         const updateMens = await MensRanking.findByIdAndUpdate(_id, req.body, {
-            new : true,
+            new : true, // to reflect updated data in postman
         });
         res.send(updateMens);
 
